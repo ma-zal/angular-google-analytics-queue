@@ -16,9 +16,15 @@ when GA library loading is finished.
 Library use
 -----------
 
-In HTML head (common GA include):
+Install by bower:
+
+    bower install --save https://github.com/ma-zal/angular-google-analytics-queue.git#master
+    
+
+In HTML head:
 
 ```html
+<!-- Common GA include -->
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -28,6 +34,9 @@ In HTML head (common GA include):
     ga('create', 'UA-12345678-123', 'auto');
     // ga('send', 'pageview'); // Disabled, because of SPA application are sending it manually
 </script>
+
+<!-- GAQ Library -->
+<script type="text/javascript" src="bower_components/angular-google-analytics-queue/google-analytics-queue.js"></script>
 ```
 
 Angular module dependencies:
@@ -41,7 +50,7 @@ Using in controller:
 ```javascript
 // Inject `ga` into controller function
 angular.module('myApp').controller('exampleController', function(ga) {
-    // use `ga` method transparenstly in same way as with Google Analytics library.
+    // use `ga` method transparently in same way as with Google Analytics library.
 
     // Example 1
     ga('send', 'pageview');
