@@ -13,13 +13,57 @@ If you call `window.ga(...)` too earlier, the method does not exists because Ga 
 This service creates a queue layer. If GA is not ready, commands are stored - and send immediately
 when GA library loading is finished.
 
+Library use
+-----------
+
+In HTML head (common GA include):
+
+```html
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+    ga('create', 'UA-12345678-123', 'auto');
+    // ga('send', 'pageview'); // Disabled, because of SPA application are sending it manually
+</script>
+```
+
+Angular module dependencies:
+
+```javascript
+angular.module('myApp', [ 'gaq' ] );
+```
+
+Using in controller:
+
+```javascript
+// Inject `ga` into controller function
+angular.module('myApp').controller('exampleController', function(ga) {
+    // use `ga` method transparenstly in same way as with Google Analytics library.
+
+    // Example 1
+    ga('send', 'pageview');
+
+    // Example 2
+    ga('send', {
+        hitType: 'event',
+        eventCategory: 'Static pages',
+        eventAction: 'View Welcome page',
+        eventLabel: 'Welcome on my page'
+    });
+});
+```
+
+
 
 Alternative: Synchronous library loading
 ----------------------------------------
 If you do not want to use any additional library, you can load the Google Analytics synchronously.
 For this alternative, do not use this original script:
 
-```javascript
+```html
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -33,8 +77,8 @@ For this alternative, do not use this original script:
 
 But switch it to this synchronous variant:
 	
-```javascript
-<script type="text/javascript" src="//www.google-analytics.com/analytics.js"></script>
+```html
+<script type="text/javascript" src="https://www.google-analytics.com/analytics.js"></script>
 <script type="text/javascript">
     ga('create', 'UA-12345678-123', 'auto');
 </script>
