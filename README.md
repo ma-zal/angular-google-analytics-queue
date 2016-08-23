@@ -65,10 +65,13 @@ angular.module('myApp').controller('exampleController', function(ga) {
 });
 ```
 
+---
 
+Other ideas, that can help you with GA
+=======================================
 
-Alternative: Synchronous library loading
-----------------------------------------
+Alternative way: Synchronous library loading
+--------------------------------------------
 If you do not want to use any additional library, you can load the Google Analytics synchronously.
 For this alternative, do not use this original script:
 
